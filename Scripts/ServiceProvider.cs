@@ -9,7 +9,7 @@ public partial class ServiceProvider : Node
 
 	public override void _Ready()
 	{
-		if (Instance is not null)
+		if (Instance is null)
 			Instance = this;
 		else
 			throw new Exception("Service provider is already instantiated, for correct usage, be sure to add it to the auto-load and let it handle the rest.");
