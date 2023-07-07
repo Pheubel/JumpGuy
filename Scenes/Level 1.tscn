@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://f504s734vnsh" path="res://SceneObjects/Player.tscn" id="4_a4xuj"]
 
 [node name="Level 1" type="Node2D"]
-texture_filter = 2
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
