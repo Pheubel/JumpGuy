@@ -22,3 +22,7 @@ ServiceProvider="*res://Scripts/ServiceProvider.cs"
 [dotnet]
 
 project/assembly_name="Jump Guy"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
