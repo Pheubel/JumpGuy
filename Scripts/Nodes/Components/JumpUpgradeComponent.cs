@@ -1,5 +1,6 @@
 
 using Godot;
+using System;
 using System.Numerics;
 
 #if !NET8_0_OR_GREATER
@@ -36,6 +37,7 @@ public partial class JumpUpgradeComponent : Node
 		CollectedJumpUpgrades |= upgrade;
 	}
 
+	//[Flags]
 	public enum JumpUpgradeFlag
 	{
 		None = 0,

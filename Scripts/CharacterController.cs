@@ -19,20 +19,20 @@ public partial class CharacterController : CharacterBody2D
 	[Export]
 	public float TimeToFall { get; private set; } = 0.8f;
 
+	public JumpUpgradeComponent JumpUpgradeComponent { get; private set; } = null!;
+
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
-
-	private JumpUpgradeComponent? _jumpUpgradeComponent;
 
 	private float _jumpVelocity;
 	private float _jumpGravity;
 	private float _variableJumpGravity;
 	private float _fallGravity;
 
-	[MemberNotNull(nameof(_jumpUpgradeComponent))]
+	[MemberNotNull(nameof(JumpUpgradeComponent))]
 	public override void _Ready()
 	{
-		_jumpUpgradeComponent = GetNode<JumpUpgradeComponent>("JumpUpgradeComponent") ?? throw new Exception();
+		JumpUpgradeComponent = GetNode<JumpUpgradeComponent>("JumpUpgradeComponent") ?? throw new Exception();
 
 		_jumpVelocity = ((2 * JumpHeight) / TimeToPeak) * -1;
 		_jumpGravity = ((-2 * JumpHeight) / (TimeToPeak * TimeToPeak)) * -1;
@@ -48,10 +48,10 @@ public partial class CharacterController : CharacterBody2D
 		if (!IsOnFloor())
 			velocity.Y += GetGravity() * (float)delta;
 		else
-			_jumpUpgradeComponent!.ResetJumpCount();
+			JumpUpgradeComponent.ResetJumpCount();
 
 		// Handle Jump.
-		if (Input.IsActionJustPressed(Constants.Action.game_jump) && (IsOnFloor() || _jumpUpgradeComponent!.TryJump()))
+		if (Input.IsActionJustPressed(Constants.Action.game_jump) && (IsOnFloor() || JumpUpgradeComponent!.TryJump()))
 			velocity.Y = _jumpVelocity;
 
 		// Get the input direction and handle the movement/deceleration.
