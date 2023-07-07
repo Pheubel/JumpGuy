@@ -1,13 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://b1v4m508jiplp"]
+[gd_scene load_steps=6 format=3 uid="uid://b1v4m508jiplp"]
 
 [ext_resource type="TileSet" uid="uid://do6cg1wgb1s58" path="res://Tiles/level tileset.tres" id="1_twmto"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_qpxtq"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="3_mpyqc"]
 [ext_resource type="PackedScene" uid="uid://f504s734vnsh" path="res://SceneObjects/Player.tscn" id="4_a4xuj"]
-[ext_resource type="Texture2D" uid="uid://dpe2gh8rrcovv" path="res://Textures/riskycannon.png" id="5_vysu0"]
-[ext_resource type="Script" path="res://Scripts/Nodes/Components/PickUpComponents/JumpUpgradePickupComponent.cs" id="6_lma8g"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_w8m4d"]
+[ext_resource type="PackedScene" uid="uid://q0jmk8vbq44s" path="res://SceneObjects/Pick Ups/JumpPickUp.tscn" id="5_xwurn"]
 
 [node name="Level 1" type="Node2D"]
 
@@ -64,20 +61,7 @@ floor_snap_length = 2.0
 TimeToPeak = 0.4
 TimeToFall = 0.3
 
-[node name="Upgrade" type="Node2D" parent="."]
-position = Vector2(478, 6)
-
-[node name="Upgrade Sprite" type="Sprite2D" parent="Upgrade"]
-scale = Vector2(0.216867, 0.216867)
-texture = ExtResource("5_vysu0")
-
-[node name="PickupBounds" type="Area2D" parent="Upgrade"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Upgrade/PickupBounds"]
-shape = SubResource("RectangleShape2D_w8m4d")
-
-[node name="UpgradePickupComponent" type="Node" parent="Upgrade"]
-script = ExtResource("6_lma8g")
-Upgrade = 1
+[node name="Upgrade" parent="." instance=ExtResource("5_xwurn")]
+position = Vector2(472, 0)
 
 [editable path="Player/CharacterBody2D"]
