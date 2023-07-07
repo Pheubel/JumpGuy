@@ -9,18 +9,19 @@ using System.Runtime.Intrinsics.X86;
 
 public partial class JumpUpgradeComponent : Node
 {
+	[Signal]
+	public delegate void OnAirJumpEventHandler();
+
 	public int RemainingJumpCount { get; private set; }
+
 	[Export]
 	public JumpUpgradeFlag CollectedJumpUpgrades { get; private set; }
 
+	private int _maxAirJumpCount = default;
+
 	public void ResetJumpCount()
 	{
-#if !NET8_0_OR_GREATER
-		if (Popcnt.IsSupported)
-			RemainingJumpCount = (int)Popcnt.PopCount((uint)CollectedJumpUpgrades);
-		else
-#endif
-			RemainingJumpCount = BitOperations.PopCount((uint)CollectedJumpUpgrades);
+		RemainingJumpCount = _maxAirJumpCount;
 	}
 
 	public bool TryJump()
@@ -29,15 +30,22 @@ public partial class JumpUpgradeComponent : Node
 			return false;
 
 		RemainingJumpCount--;
+		EmitSignal(SignalName.OnAirJump);
 		return true;
 	}
 
 	public void AddUpgrade(JumpUpgradeFlag upgrade)
 	{
 		CollectedJumpUpgrades |= upgrade;
+
+#if !NET8_0_OR_GREATER
+		if (Popcnt.IsSupported)
+			_maxAirJumpCount = (int)Popcnt.PopCount((uint)CollectedJumpUpgrades);
+		else
+#endif
+			_maxAirJumpCount = BitOperations.PopCount((uint)CollectedJumpUpgrades);
 	}
 
-	//[Flags]
 	public enum JumpUpgradeFlag
 	{
 		None = 0,

@@ -65,9 +65,9 @@ TimeToPeak = 0.4
 TimeToFall = 0.3
 
 [node name="Upgrade" type="Node2D" parent="."]
+position = Vector2(478, 6)
 
 [node name="Upgrade Sprite" type="Sprite2D" parent="Upgrade"]
-position = Vector2(470, 0)
 scale = Vector2(0.216867, 0.216867)
 texture = ExtResource("5_vysu0")
 
@@ -79,3 +79,5 @@ shape = SubResource("RectangleShape2D_w8m4d")
 [node name="UpgradePickupComponent" type="Node" parent="Upgrade"]
 script = ExtResource("6_lma8g")
 Upgrade = 1
+
+[editable path="Player/CharacterBody2D"]

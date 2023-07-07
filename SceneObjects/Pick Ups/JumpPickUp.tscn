@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://q0jmk8vbq44s"]
+
+[ext_resource type="Texture2D" uid="uid://dpe2gh8rrcovv" path="res://Textures/riskycannon.png" id="1_4j2kj"]
+[ext_resource type="Script" path="res://Scripts/Nodes/Components/PickUpComponents/JumpUpgradePickupComponent.cs" id="2_oe7wb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w8m4d"]
+
+[node name="Upgrade" type="Node2D"]
+
+[node name="Upgrade Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.216867, 0.216867)
+texture = ExtResource("1_4j2kj")
+
+[node name="PickupBounds" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupBounds"]
+shape = SubResource("RectangleShape2D_w8m4d")
+
+[node name="UpgradePickupComponent" type="Node" parent="."]
+script = ExtResource("2_oe7wb")
+Upgrade = 1

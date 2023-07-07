@@ -51,7 +51,7 @@ public partial class CharacterController : CharacterBody2D
 			JumpUpgradeComponent.ResetJumpCount();
 
 		// Handle Jump.
-		if (Input.IsActionJustPressed(Constants.Action.game_jump) && (IsOnFloor() || JumpUpgradeComponent!.TryJump()))
+		if (Input.IsActionJustPressed(Constants.Action.game_jump) && (IsOnFloor() || JumpUpgradeComponent.TryJump()))
 			velocity.Y = _jumpVelocity;
 
 		// Get the input direction and handle the movement/deceleration.
