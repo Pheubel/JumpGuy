@@ -4,6 +4,4 @@
 
 [node name="Main" type="Node2D"]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-
 [node name="Level 1" parent="." instance=ExtResource("1_6m3lq")]
