@@ -5,7 +5,7 @@ public partial class ServiceProvider : Node
 {
 	private System.Collections.Generic.Dictionary<Type, object> _service = new();
 
-	public static ServiceProvider Instance { get; private set; }
+	public static ServiceProvider Instance { get; private set; } = null!;
 
 	public override void _Ready()
 	{
@@ -19,7 +19,7 @@ public partial class ServiceProvider : Node
 	{
 		if (_service.TryGetValue(typeof(T), out var service))
 		{
-			return (T)service;
+			return (T)service!;
 		}
 
 		throw new Exception($"Could not find service: {nameof(T)}");
@@ -29,7 +29,7 @@ public partial class ServiceProvider : Node
 	{
 		if (_service.TryGetValue(typeof(T), out var s))
 		{
-			service = (T)s;
+			service = (T)s!;
 			return true;
 		}
 
@@ -39,12 +39,16 @@ public partial class ServiceProvider : Node
 
 	public void AddService<T>(T service)
 	{
+		ArgumentNullException.ThrowIfNull(service, nameof(service));
+
 		if (!_service.TryAdd(typeof(T), service))
 			throw new Exception($"Service \"{nameof(T)}\" has already been added.");
 	}
 
 	public bool TryAddService<T>(T service)
 	{
+		ArgumentNullException.ThrowIfNull(service, nameof(service));
+
 		return _service.TryAdd(typeof(T), service);
 	}
 
