@@ -19,6 +19,8 @@ public partial class CharacterController : CharacterBody2D
 	[Export]
 	public float TimeToFall { get; private set; } = 0.8f;
 
+	public bool BlockInput { get; set; }
+
 	public JumpUpgradeComponent JumpUpgradeComponent { get; private set; } = null!;
 
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -51,12 +53,12 @@ public partial class CharacterController : CharacterBody2D
 			JumpUpgradeComponent.ResetJumpCount();
 
 		// Handle Jump.
-		if (Input.IsActionJustPressed(Constants.Action.game_jump) && (IsOnFloor() || JumpUpgradeComponent.TryJump()))
+		if (!BlockInput && Input.IsActionJustPressed(Constants.Action.game_jump) && (IsOnFloor() || JumpUpgradeComponent.TryJump()))
 			velocity.Y = _jumpVelocity;
 
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.
-		float direction = Input.GetAxis(Constants.Action.game_move_left, Constants.Action.game_move_right);
+		float direction = BlockInput ? 0 : Input.GetAxis(Constants.Action.game_move_left, Constants.Action.game_move_right);
 		if (direction != 0)
 		{
 			velocity.X = direction * Speed;

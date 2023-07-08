@@ -1,10 +1,10 @@
 using Godot;
 using System;
 
-public partial class JumpUpgradePickupComponent : Node, IUpgradePickupComponent<JumpUpgradeComponent.JumpUpgradeFlag>
+public partial class JumpUpgradePickupComponent : Node, IUpgradePickupComponent<JumpUpgradeFlag>
 {
 	[Export(PropertyHint.Enum)]
-	public JumpUpgradeComponent.JumpUpgradeFlag Upgrade { get; private set; }
+	public JumpUpgradeFlag Upgrade { get; private set; }
 
 	public override void _Ready()
 	{

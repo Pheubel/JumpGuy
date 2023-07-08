@@ -1,6 +1,5 @@
 
 using Godot;
-using System;
 using System.Numerics;
 
 #if !NET8_0_OR_GREATER
@@ -14,10 +13,14 @@ public partial class JumpUpgradeComponent : Node
 
 	public int RemainingJumpCount { get; private set; }
 
-	[Export]
-	public JumpUpgradeFlag CollectedJumpUpgrades { get; private set; }
+	private PlayerData _playerData = null!;
 
 	private int _maxAirJumpCount = default;
+
+	public override void _Ready()
+	{
+		_playerData = ServiceProvider.Instance.GetService<PlayerData>();
+	}
 
 	public void ResetJumpCount()
 	{
@@ -36,19 +39,19 @@ public partial class JumpUpgradeComponent : Node
 
 	public void AddUpgrade(JumpUpgradeFlag upgrade)
 	{
-		CollectedJumpUpgrades |= upgrade;
+		_playerData.CollectedJumpupgrades |= upgrade;
 
 #if !NET8_0_OR_GREATER
 		if (Popcnt.IsSupported)
-			_maxAirJumpCount = (int)Popcnt.PopCount((uint)CollectedJumpUpgrades);
+			_maxAirJumpCount = (int)Popcnt.PopCount((uint)_playerData.CollectedJumpupgrades);
 		else
 #endif
-			_maxAirJumpCount = BitOperations.PopCount((uint)CollectedJumpUpgrades);
+			_maxAirJumpCount = BitOperations.PopCount((uint)_playerData.CollectedJumpupgrades);
 	}
+}
 
-	public enum JumpUpgradeFlag
-	{
-		None = 0,
-		CannonLevelOne = 1
-	}
+public enum JumpUpgradeFlag
+{
+	None = 0,
+	CannonLevelOne = 1
 }
