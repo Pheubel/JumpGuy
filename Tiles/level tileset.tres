@@ -1,6 +1,8 @@
-[gd_resource type="TileSet" load_steps=15 format=3 uid="uid://do6cg1wgb1s58"]
+[gd_resource type="TileSet" load_steps=19 format=3 uid="uid://do6cg1wgb1s58"]
 
 [ext_resource type="Texture2D" uid="uid://bhaxbolymq5w5" path="res://Tiles/16x16Tiles.png" id="1_tgu6c"]
+[ext_resource type="PackedScene" uid="uid://q0jmk8vbq44s" path="res://SceneObjects/Pick Ups/JumpPickUp.tscn" id="2_k4bms"]
+[ext_resource type="PackedScene" uid="uid://ba1uh5hnul8gr" path="res://SceneObjects/BreakableBlocks/BreakableBlock.tscn" id="3_ux6ni"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_rymh0"]
 tile_data = PackedInt32Array(0, 0, 0, 65536, 196608, 0, 131072, 393216, 0, 1, 65536, 0, 65537, 262144, 0, 131073, 458752, 0, 2, 131072, 0, 65538, 327680, 0, 131074, 524288, 0)
@@ -3245,9 +3247,19 @@ texture = ExtResource("1_tgu6c")
 30:30/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 30:30/0/physics_layer_0/angular_velocity = 0.0
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_g7kly"]
+resource_name = "Pick ups"
+scenes/1/scene = ExtResource("2_k4bms")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_coi6i"]
+resource_name = "Breakable Blocks"
+scenes/2/scene = ExtResource("3_ux6ni")
+
 [resource]
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_oac1s")
+sources/1 = SubResource("TileSetScenesCollectionSource_g7kly")
+sources/2 = SubResource("TileSetScenesCollectionSource_coi6i")
 pattern_0 = SubResource("TileMapPattern_rymh0")
 pattern_1 = SubResource("TileMapPattern_sy7gg")
 pattern_2 = SubResource("TileMapPattern_lv8yn")
