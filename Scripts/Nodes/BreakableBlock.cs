@@ -3,28 +3,10 @@ using System;
 
 [GlobalClass]
 [Tool]
-public partial class BreakableBlock : Node2D
+public partial class BreakableBlock : StaticBody2D
 {
-	private BreakableBlockResource? _resource;
-
 	[Export(PropertyHint.ResourceType, "BreakableBlockResource")]
-	public BreakableBlockResource? Resource
-	{
-		get => _resource; private set
-		{
-#if TOOLS
-			if (_resource is not null)
-				_resource.Changed -= HandleResourceChanged;
-#endif
-			_resource = value;
-#if TOOLS
-			if (_resource is not null)
-				_resource.Changed += HandleResourceChanged;
-			else
-				ResetResourceDependentData();
-#endif
-		}
-	}
+	private BreakableBlockResource? Resource { get; set; }
 
 #if TOOLS
 	private Sprite2D _blockSprite = null!;
@@ -34,21 +16,16 @@ public partial class BreakableBlock : Node2D
 		_blockSprite = GetNode<Sprite2D>("Block");
 	}
 
-	public override void _ExitTree()
+	public override void _Process(double delta)
 	{
-		if (Resource is null)
-			return;
-		Resource.Changed -= HandleResourceChanged;
-	}
-
-	private void HandleResourceChanged()
-	{
-		_blockSprite.Texture = Resource!.Texture;
-	}
-
-	private void ResetResourceDependentData()
-	{
-		_blockSprite.Texture = null;
+		if (Resource != null)
+		{
+			_blockSprite.Texture = Resource.Texture;
+		}
+		else
+		{
+			_blockSprite.Texture = null;
+		}
 	}
 #endif
 }

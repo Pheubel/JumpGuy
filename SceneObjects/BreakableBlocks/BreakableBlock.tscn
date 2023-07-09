@@ -1,29 +1,37 @@
-[gd_scene load_steps=7 format=3 uid="uid://ba1uh5hnul8gr"]
+[gd_scene load_steps=9 format=3 uid="uid://ba1uh5hnul8gr"]
 
 [ext_resource type="Script" path="res://Scripts/Nodes/BreakableBlock.cs" id="1_mkoc0"]
 [ext_resource type="Texture2D" uid="uid://bhaxbolymq5w5" path="res://Tiles/16x16Tiles.png" id="2_i88vw"]
-[ext_resource type="Script" path="res://Scripts/Resources/BreakableBlockResource.cs" id="3_p187e"]
+[ext_resource type="Script" path="res://Scripts/Resources/BreakableBlockResource.cs" id="3_uyru3"]
+[ext_resource type="Script" path="res://Scripts/Nodes/Components/DestroyableComponent.cs" id="4_rqcw1"]
+[ext_resource type="Script" path="res://Scripts/Nodes/Components/PlayerBulletTargetComponent.cs" id="5_l7rmm"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3ctct"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_846hw"]
 atlas = ExtResource("2_i88vw")
 region = Rect2(0, 64, 16, 16)
 
-[sub_resource type="Resource" id="Resource_vd8xf"]
-script = ExtResource("3_p187e")
-Texture = SubResource("AtlasTexture_3ctct")
+[sub_resource type="Resource" id="Resource_1imek"]
+script = ExtResource("3_uyru3")
+Texture = SubResource("AtlasTexture_846hw")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jjbd5"]
 size = Vector2(16, 16)
 
-[node name="BreakableBlock" type="Node2D"]
+[node name="BreakableBlock" type="StaticBody2D"]
 script = ExtResource("1_mkoc0")
-Resource = SubResource("Resource_vd8xf")
+Resource = SubResource("Resource_1imek")
 
 [node name="Block" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = SubResource("AtlasTexture_3ctct")
+texture = SubResource("AtlasTexture_846hw")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_jjbd5")
+
+[node name="DestroyableComponent" type="Node" parent="."]
+script = ExtResource("4_rqcw1")
+
+[node name="PlayerBulletTargetComponent" type="Node" parent="."]
+script = ExtResource("5_l7rmm")
+
+[connection signal="OnBulletHit" from="PlayerBulletTargetComponent" to="DestroyableComponent" method="Destroy"]
