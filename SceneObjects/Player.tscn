@@ -1,11 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://f504s734vnsh"]
+[gd_scene load_steps=6 format=3 uid="uid://f504s734vnsh"]
 
 [ext_resource type="Script" path="res://Scripts/CharacterController.cs" id="1_odk8u"]
 [ext_resource type="Script" path="res://Scripts/Nodes/Components/JumpUpgradeComponent.cs" id="2_s6fj6"]
+[ext_resource type="Script" path="res://Scripts/Nodes/Components/BulletSpawnerComponent.cs" id="3_ewbpm"]
+[ext_resource type="PackedScene" uid="uid://dmsctmuw6pub" path="res://SceneObjects/PlayerJumpBullet.tscn" id="4_1kbj4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xchv5"]
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_odk8u")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -19,3 +21,10 @@ shape = SubResource("RectangleShape2D_xchv5")
 
 [node name="JumpUpgradeComponent" type="Node" parent="."]
 script = ExtResource("2_s6fj6")
+
+[node name="BulletSpawnerComponent" type="Node2D" parent="."]
+script = ExtResource("3_ewbpm")
+Bullet = ExtResource("4_1kbj4")
+SpawnOffset = Vector2(0, 10)
+
+[connection signal="OnAirJump" from="JumpUpgradeComponent" to="BulletSpawnerComponent" method="Shoot"]

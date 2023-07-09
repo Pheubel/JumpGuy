@@ -1,10 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://dmsctmuw6pub"]
+[gd_scene load_steps=5 format=3 uid="uid://dmsctmuw6pub"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_hp7b4"]
+[ext_resource type="Texture2D" uid="uid://dyusun4c7tqba" path="res://Textures/cannonball.png" id="1_8deoy"]
+[ext_resource type="Script" path="res://Scripts/PlayerJumpBullet.cs" id="1_rtr37"]
+[ext_resource type="Script" path="res://Scripts/Nodes/Components/ConstantMovementComponent.cs" id="2_04q8a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y24dr"]
+size = Vector2(28, 28)
 
 [node name="PlayerJumpBullet" type="Area2D" groups=["PlayerBullet"]]
+scale = Vector2(0.5, 0.5)
+input_pickable = false
+script = ExtResource("1_rtr37")
+ExcludeGroup = "Player"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_8deoy")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_hp7b4")
+[node name="Bounds" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_y24dr")
+
+[node name="ConstantMovementComponent" type="Node" parent="."]
+script = ExtResource("2_04q8a")
+Velocity = Vector2(0, 200)
