@@ -31,10 +31,13 @@ public partial class CharacterController : CharacterBody2D
 	private float _variableJumpGravity;
 	private float _fallGravity;
 
+	private AnimationTree _animationTree;
+
 	[MemberNotNull(nameof(JumpUpgradeComponent))]
 	public override void _Ready()
 	{
 		JumpUpgradeComponent = GetNode<JumpUpgradeComponent>("JumpUpgradeComponent") ?? throw new Exception();
+		_animationTree = GetNode<AnimationTree>("AnimationTree");
 
 		_jumpVelocity = ((2 * JumpHeight) / TimeToPeak) * -1;
 		_jumpGravity = ((-2 * JumpHeight) / (TimeToPeak * TimeToPeak)) * -1;
@@ -61,10 +64,20 @@ public partial class CharacterController : CharacterBody2D
 		float direction = BlockInput ? 0 : Input.GetAxis(Constants.Action.game_move_left, Constants.Action.game_move_right);
 		if (direction != 0)
 		{
+			_animationTree.Set("parameters/conditions/idle", false);
+			_animationTree.Set("parameters/conditions/walking", true);
+
+			_animationTree.Set("parameters/walk/blend_position", direction);
+
 			velocity.X = direction * Speed;
 		}
 		else
 		{
+			_animationTree.Set("parameters/conditions/idle", true);
+			_animationTree.Set("parameters/conditions/walking", false);
+
+			_animationTree.Set("parameters/walk/blend_position", 0);
+
 			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
 		}
 

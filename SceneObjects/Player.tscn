@@ -1,22 +1,124 @@
-[gd_scene load_steps=6 format=3 uid="uid://f504s734vnsh"]
+[gd_scene load_steps=20 format=3 uid="uid://f504s734vnsh"]
 
 [ext_resource type="Script" path="res://Scripts/CharacterController.cs" id="1_odk8u"]
 [ext_resource type="Script" path="res://Scripts/Nodes/Components/JumpUpgradeComponent.cs" id="2_s6fj6"]
 [ext_resource type="Script" path="res://Scripts/Nodes/Components/BulletSpawnerComponent.cs" id="3_ewbpm"]
 [ext_resource type="PackedScene" uid="uid://dmsctmuw6pub" path="res://SceneObjects/PlayerJumpBullet.tscn" id="4_1kbj4"]
+[ext_resource type="Texture2D" uid="uid://djjwhxf0i6rg" path="res://Textures/characterSheet.png" id="5_oj0lh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xchv5"]
+size = Vector2(18, 18)
+
+[sub_resource type="Animation" id="Animation_h02s2"]
+resource_name = "walk_right"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [79, 78, 77, 76, 75, 74, 73, 72, 71, 70]
+}
+
+[sub_resource type="Animation" id="Animation_x1sj6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [79]
+}
+
+[sub_resource type="Animation" id="Animation_wp0va"]
+resource_name = "walk_left"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [50, 51, 52, 53, 54, 55, 56, 57, 58, 59]
+}
+
+[sub_resource type="Animation" id="Animation_7mo8y"]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mb5c1"]
+_data = {
+"RESET": SubResource("Animation_x1sj6"),
+"idle": SubResource("Animation_7mo8y"),
+"walk_left": SubResource("Animation_wp0va"),
+"walk_right": SubResource("Animation_h02s2")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5omhj"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0th7n"]
+animation = &"walk_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fbs54"]
+animation = &"walk_right"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_axgoo"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_0th7n")
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_fbs54")
+blend_point_1/pos = 1.0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tu7ym"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fxh7e"]
+advance_mode = 2
+advance_condition = &"walking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cblxv"]
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_7oldk"]
+states/Start/position = Vector2(185, 86)
+states/idle/node = SubResource("AnimationNodeAnimation_5omhj")
+states/idle/position = Vector2(357, 86)
+states/walk/node = SubResource("AnimationNodeBlendSpace1D_axgoo")
+states/walk/position = Vector2(536, 86)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_tu7ym"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_fxh7e"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_cblxv")]
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_odk8u")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_xchv5")
 
 [node name="JumpUpgradeComponent" type="Node" parent="."]
@@ -26,5 +128,27 @@ script = ExtResource("2_s6fj6")
 script = ExtResource("3_ewbpm")
 Bullet = ExtResource("4_1kbj4")
 SpawnOffset = Vector2(0, 10)
+
+[node name="CharacterSheet" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1.005, 0)
+scale = Vector2(0.16, 0.16)
+texture = ExtResource("5_oj0lh")
+hframes = 10
+vframes = 8
+frame = 79
+
+[node name="PlayerAnimation" type="AnimationPlayer" parent="CharacterSheet"]
+libraries = {
+"": SubResource("AnimationLibrary_mb5c1")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_7oldk")
+anim_player = NodePath("../CharacterSheet/PlayerAnimation")
+active = true
+parameters/conditions/idle = false
+parameters/conditions/walking = false
+parameters/walk/blend_position = 0.0
 
 [connection signal="OnAirJump" from="JumpUpgradeComponent" to="BulletSpawnerComponent" method="Shoot"]

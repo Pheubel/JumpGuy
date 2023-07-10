@@ -5,7 +5,7 @@ using System;
 public partial class PlayerJumpBullet : Area2D
 {
 	[Export]
-	string ExcludeGroup { get; set; }
+	string ExcludeGroup { get; set; } = string.Empty;
 
 	public override void _Ready()
 	{
