@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://ca6i53auim5h"]
+
+[ext_resource type="PackedScene" uid="uid://ba1uh5hnul8gr" path="res://SceneObjects/BreakableBlocks/BreakableBlock.tscn" id="1_q13fi"]
+[ext_resource type="Shader" path="res://ShaderScripts/recolor.gdshader" id="2_onsen"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s41ro"]
+shader = ExtResource("2_onsen")
+shader_parameter/color = Color(0.0392157, 0.290196, 0.137255, 1)
+
+[node name="BreakableBlock" instance=ExtResource("1_q13fi")]
+
+[node name="Block" parent="." index="0"]
+material = SubResource("ShaderMaterial_s41ro")
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = false
