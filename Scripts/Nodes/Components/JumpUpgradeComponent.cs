@@ -20,6 +20,8 @@ public partial class JumpUpgradeComponent : Node
 	public override void _Ready()
 	{
 		_playerData = ServiceProvider.Instance.GetService<PlayerData>();
+
+		_playerData.Changed += UpdateMaxJumpCount;
 	}
 
 	public void ResetJumpCount()
@@ -37,21 +39,13 @@ public partial class JumpUpgradeComponent : Node
 		return true;
 	}
 
-	public void AddUpgrade(JumpUpgradeFlag upgrade)
+	public void UpdateMaxJumpCount()
 	{
-		_playerData.CollectedJumpupgrades |= upgrade;
-
 #if !NET8_0_OR_GREATER
 		if (Popcnt.IsSupported)
-			_maxAirJumpCount = (int)Popcnt.PopCount((uint)_playerData.CollectedJumpupgrades);
+			_maxAirJumpCount = (int)Popcnt.PopCount((uint)_playerData.CollectedJumpUpgrades);
 		else
 #endif
-			_maxAirJumpCount = BitOperations.PopCount((uint)_playerData.CollectedJumpupgrades);
+			_maxAirJumpCount = BitOperations.PopCount((uint)_playerData.CollectedJumpUpgrades);
 	}
-}
-
-public enum JumpUpgradeFlag
-{
-	None = 0,
-	CannonLevelOne = 1
 }

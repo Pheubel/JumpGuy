@@ -6,16 +6,10 @@ public partial class JumpUpgradePickupComponent : Node, IUpgradePickupComponent<
 	[Export(PropertyHint.Enum)]
 	public JumpUpgradeFlag Upgrade { get; private set; }
 
-	public override void _Ready()
+	public void HandlePlayerTouched(CharacterController _)
 	{
-		GetNode<Area2D>("../PickupBounds").BodyEntered += HandleBodyEntered;
-	}
+		var data = ServiceProvider.Instance.GetService<PlayerData>();
 
-	private void HandleBodyEntered(Node2D body)
-	{
-		if (body is CharacterController character)
-		{
-			character.JumpUpgradeComponent.AddUpgrade(Upgrade);
-		}
+		data.CollectedJumpUpgrades |= Upgrade;
 	}
 }

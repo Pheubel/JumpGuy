@@ -19,7 +19,8 @@ public partial class CharacterController : CharacterBody2D
 	[Export]
 	public float TimeToFall { get; private set; } = 0.8f;
 
-	public bool BlockInput { get; set; }
+	[Export]
+	public bool BlockInput { get; set; } = false;
 
 	public JumpUpgradeComponent JumpUpgradeComponent { get; private set; } = null!;
 

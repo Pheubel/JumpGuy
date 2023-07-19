@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://q0jmk8vbq44s"]
+[gd_scene load_steps=6 format=3 uid="uid://q0jmk8vbq44s"]
 
 [ext_resource type="Texture2D" uid="uid://dpe2gh8rrcovv" path="res://Textures/riskycannon.png" id="1_4j2kj"]
 [ext_resource type="Script" path="res://Scripts/Nodes/Components/PickUpComponents/JumpUpgradePickupComponent.cs" id="2_oe7wb"]
-[ext_resource type="Script" path="res://Scripts/Nodes/Components/RemoveOnTouchComponent.cs" id="3_hn1b2"]
+[ext_resource type="Script" path="res://Scripts/Nodes/Components/DestroyableComponent.cs" id="3_4tnqu"]
+[ext_resource type="Script" path="res://Scripts/Nodes/Components/ReactToPlayerTouchedComponent.cs" id="4_0yk8t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w8m4d"]
 
@@ -21,5 +22,12 @@ shape = SubResource("RectangleShape2D_w8m4d")
 script = ExtResource("2_oe7wb")
 Upgrade = 1
 
-[node name="RemoveOnTouchComponent" type="Node" parent="."]
-script = ExtResource("3_hn1b2")
+[node name="DestroyableComponent" type="Node" parent="."]
+script = ExtResource("3_4tnqu")
+
+[node name="ReactToPlayerTouchedComponent" type="Node" parent="."]
+script = ExtResource("4_0yk8t")
+
+[connection signal="body_entered" from="PickupBounds" to="ReactToPlayerTouchedComponent" method="HandleBodyEntered"]
+[connection signal="OnPlayerTouched" from="ReactToPlayerTouchedComponent" to="UpgradePickupComponent" method="HandlePlayerTouched"]
+[connection signal="OnPlayerTouched" from="ReactToPlayerTouchedComponent" to="DestroyableComponent" method="Destroy" unbinds=1]

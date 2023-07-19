@@ -1,8 +1,9 @@
-[gd_resource type="TileSet" load_steps=20 format=3 uid="uid://do6cg1wgb1s58"]
+[gd_resource type="TileSet" load_steps=21 format=3 uid="uid://do6cg1wgb1s58"]
 
 [ext_resource type="Texture2D" uid="uid://bhaxbolymq5w5" path="res://Tiles/16x16Tiles.png" id="1_tgu6c"]
 [ext_resource type="PackedScene" uid="uid://q0jmk8vbq44s" path="res://SceneObjects/Pick Ups/JumpPickUp.tscn" id="2_k4bms"]
-[ext_resource type="PackedScene" uid="uid://ca6i53auim5h" path="res://SceneObjects/BreakableBlocks/breakable_block_green.tscn" id="3_csafe"]
+[ext_resource type="PackedScene" path="res://SceneObjects/BreakableBlocks/breakable_block_green.tscn" id="3_csafe"]
+[ext_resource type="PackedScene" uid="uid://dvo1m4rag1l6j" path="res://SceneObjects/Pick Ups/HealthUpgradePickUp.tscn" id="3_nn0nv"]
 [ext_resource type="PackedScene" uid="uid://ba1uh5hnul8gr" path="res://SceneObjects/BreakableBlocks/BreakableBlock.tscn" id="3_ux6ni"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_rymh0"]
@@ -3255,7 +3256,8 @@ texture = ExtResource("1_tgu6c")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_g7kly"]
 resource_name = "Pick ups"
-scenes/1/scene = ExtResource("2_k4bms")
+scenes/2/scene = ExtResource("2_k4bms")
+scenes/3/scene = ExtResource("3_nn0nv")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_coi6i"]
 resource_name = "Breakable Blocks"

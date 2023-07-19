@@ -33,5 +33,3 @@ script = ExtResource("4_rqcw1")
 
 [node name="PlayerBulletTargetComponent" type="Node" parent="."]
 script = ExtResource("5_l7rmm")
-
-[connection signal="OnBulletHit" from="PlayerBulletTargetComponent" to="DestroyableComponent" method="Destroy"]

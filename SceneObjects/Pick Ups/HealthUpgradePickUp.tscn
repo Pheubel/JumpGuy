@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvo1m4rag1l6j"]
+
+[ext_resource type="PackedScene" uid="uid://q0jmk8vbq44s" path="res://SceneObjects/Pick Ups/JumpPickUp.tscn" id="1_pwjxq"]
+[ext_resource type="Texture2D" uid="uid://ohnq7ug6jk7r" path="res://Textures/platformPack_tilesheet.png" id="2_hpn8y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1yrg"]
+atlas = ExtResource("2_hpn8y")
+region = Rect2(720, 272, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wdemd"]
+atlas = ExtResource("2_hpn8y")
+region = Rect2(592, 144, 32, 32)
+
+[node name="Upgrade" instance=ExtResource("1_pwjxq")]
+
+[node name="Upgrade Sprite" parent="." index="0"]
+scale = Vector2(0.407, 0.407)
+texture = SubResource("AtlasTexture_y1yrg")
+
+[node name="DestroyableComponent" parent="." index="3"]
+_target = NodePath("..")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="4"]
+scale = Vector2(0.115, 0.115)
+texture = SubResource("AtlasTexture_wdemd")

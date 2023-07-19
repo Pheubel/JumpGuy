@@ -149,5 +149,3 @@ active = true
 parameters/conditions/idle = false
 parameters/conditions/walking = false
 parameters/walk/blend_position = 0.0
-
-[connection signal="OnAirJump" from="JumpUpgradeComponent" to="BulletSpawnerComponent" method="Shoot"]

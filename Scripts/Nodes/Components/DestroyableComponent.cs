@@ -7,9 +7,12 @@ public partial class DestroyableComponent : Node
 	[Signal]
 	public delegate void OnDestroyedEventHandler();
 
+	[Export(PropertyHint.NodePathToEditedNode)]
+	private NodePath _target = new NodePath("../");
+
 	public void Destroy()
 	{
-		this.GetParent().QueueFree();
+		GetNode(_target).QueueFree();
 		EmitSignal(SignalName.OnDestroyed);
 	}
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://4e382yhv6imc"]
+[gd_scene load_steps=2 format=3 uid="uid://be6l88ndqih0w"]
 
 [ext_resource type="TileSet" uid="uid://do6cg1wgb1s58" path="res://Tiles/level tileset.tres" id="1_ajgcw"]
 
@@ -22,4 +22,4 @@ layer_2/modulate = Color(1, 1, 1, 1)
 layer_2/y_sort_enabled = false
 layer_2/y_sort_origin = 0
 layer_2/z_index = 0
-layer_2/tile_data = PackedInt32Array(589822, 2, 65536, 589823, 2, 65536, 524288, 2, 65536)
+layer_2/tile_data = PackedInt32Array(589822, 2, 65536, 589823, 2, 65536, 524288, 2, 65536, 655359, 1, 196608)
