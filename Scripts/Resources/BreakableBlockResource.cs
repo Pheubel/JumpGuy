@@ -3,7 +3,6 @@ using Godot;
 
 
 [GlobalClass]
-[Tool]
 public partial class BreakableBlockResource : Resource
 {
 	private Texture2D _texture;

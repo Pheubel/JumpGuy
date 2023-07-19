@@ -1,10 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://dhe1a2ljfalhy"]
+[gd_scene load_steps=6 format=3 uid="uid://dhe1a2ljfalhy"]
 
 [ext_resource type="PackedScene" uid="uid://b1v4m508jiplp" path="res://Scenes/Level 1.tscn" id="1_6m3lq"]
+[ext_resource type="Script" path="res://Scripts/ServiceProvider.cs" id="1_hvyvt"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_urlo6"]
+[ext_resource type="Script" path="res://Scripts/Nodes/Systems/SaveSystem.cs" id="2_uuk5a"]
 [ext_resource type="Script" path="res://Scripts/SceneHost.cs" id="3_2xa6s"]
 
 [node name="Main" type="Node2D"]
+
+[node name="ServiceProvider" type="Node" parent="."]
+script = ExtResource("1_hvyvt")
+
+[node name="SaveSystem" type="Node" parent="."]
+script = ExtResource("2_uuk5a")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(35, 52)

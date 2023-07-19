@@ -24,8 +24,8 @@ public partial class CharacterController : CharacterBody2D
 
 	public JumpUpgradeComponent JumpUpgradeComponent { get; private set; } = null!;
 
-	// Get the gravity from the project settings to be synced with RigidBody nodes.
-	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+	//// Get the gravity from the project settings to be synced with RigidBody nodes.
+	//public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
 	private float _jumpVelocity;
 	private float _jumpGravity;
