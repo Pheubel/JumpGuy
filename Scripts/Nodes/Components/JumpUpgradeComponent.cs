@@ -22,6 +22,7 @@ public partial class JumpUpgradeComponent : Node
 		_playerData = ServiceProvider.Instance.GetService<PlayerData>();
 
 		_playerData.Changed += UpdateMaxJumpCount;
+		UpdateMaxJumpCount();
 	}
 
 	public void ResetJumpCount()

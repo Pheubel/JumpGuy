@@ -16,12 +16,12 @@ public partial class PlayerJumpBullet : Area2D
 
 			if (body.TryGetChildOfType<PlayerBulletTargetComponent>(out var target))
 			{
-				GD.Print("hit a node with a target component child.");
+				//GD.Print("hit a node with a target component child.");
 				target.Hit();
 			}
 			else
 			{
-				GD.Print($"something else hit: {body.Name}");
+				//GD.Print($"something else hit: {body.Name}");
 			}
 
 			QueueFree();

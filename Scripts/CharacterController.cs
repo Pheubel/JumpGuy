@@ -44,11 +44,6 @@ public partial class CharacterController : CharacterBody2D
 		_jumpGravity = ((-2 * JumpHeight) / (TimeToPeak * TimeToPeak)) * -1;
 		_fallGravity = ((-2 * JumpHeight) / (TimeToFall * TimeToFall)) * -1;
 		_variableJumpGravity = (_jumpVelocity * _jumpVelocity) / (2 * VariableJumpHeight);
-
-		GD.Print("ready called\n" +
-			$"\tjump velocity: {_jumpVelocity}" +
-			$"\tjump gravity: {_jumpGravity}" +
-			$"\tfall gravity: {_fallGravity}");
 	}
 
 	public override void _PhysicsProcess(double delta)
