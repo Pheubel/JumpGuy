@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bovrqpe3w3rml"]
+
+[ext_resource type="Script" path="res://Scripts/SceneChanger.cs" id="1_u4ekp"]
+[ext_resource type="Script" path="res://Scripts/Nodes/Components/ReactToPlayerTouchedComponent.cs" id="2_h45nt"]
+
+[node name="SceneChangeArea" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+
+[node name="SceneChanger" type="Node" parent="."]
+script = ExtResource("1_u4ekp")
+
+[node name="ReactToPlayerTouchedComponent" type="Node" parent="."]
+script = ExtResource("2_h45nt")
+
+[connection signal="body_entered" from="Area2D" to="ReactToPlayerTouchedComponent" method="HandleBodyEntered"]
