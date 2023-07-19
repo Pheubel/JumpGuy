@@ -14,10 +14,10 @@ public partial class CharacterController : CharacterBody2D
 	public float VariableJumpHeight { get; private set; } = 40;
 
 	[Export]
-	public float TimeToPeak { get; private set; } = 1;
+	public float TimeToPeak { get; private set; } = 0.4f;
 
 	[Export]
-	public float TimeToFall { get; private set; } = 0.8f;
+	public float TimeToFall { get; private set; } = 0.3f;
 
 	[Export]
 	public bool BlockInput { get; set; } = false;

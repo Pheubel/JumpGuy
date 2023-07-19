@@ -16,3 +16,4 @@ script = ExtResource("1_u4ekp")
 script = ExtResource("2_h45nt")
 
 [connection signal="body_entered" from="Area2D" to="ReactToPlayerTouchedComponent" method="HandleBodyEntered"]
+[connection signal="OnPlayerTouched" from="ReactToPlayerTouchedComponent" to="SceneChanger" method="SwapScene" unbinds=1]

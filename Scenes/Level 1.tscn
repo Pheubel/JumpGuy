@@ -42,12 +42,6 @@ polygon = PackedVector2Array(-320, 384, -57, 384, -57, 171, 624, 171, 624, -336,
 [node name="Player" parent="." instance=ExtResource("4_a4xuj")]
 position = Vector2(35, 52)
 floor_snap_length = 2.0
-Speed = null
-JumpHeight = null
-VariableJumpHeight = null
-TimeToPeak = 0.4
-TimeToFall = 0.3
-BlockInput = null
 
 [node name="PhantomCamera2D" type="Node2D" parent="."]
 position = Vector2(35, 52)
