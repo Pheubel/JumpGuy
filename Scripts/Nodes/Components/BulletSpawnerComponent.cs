@@ -20,4 +20,3 @@ public partial class BulletSpawnerComponent : Node2D
 		bullet.GlobalPosition = GlobalPosition + SpawnOffset;
 	}
 }
-

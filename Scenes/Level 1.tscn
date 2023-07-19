@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://b1v4m508jiplp"]
+[gd_scene load_steps=4 format=3 uid="uid://b1v4m508jiplp"]
 
 [ext_resource type="TileSet" uid="uid://do6cg1wgb1s58" path="res://Tiles/level tileset.tres" id="1_twmto"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_qpxtq"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="3_mpyqc"]
 [ext_resource type="PackedScene" uid="uid://f504s734vnsh" path="res://SceneObjects/Player.tscn" id="4_a4xuj"]
 
@@ -27,13 +26,6 @@ layer_2/y_sort_enabled = false
 layer_2/y_sort_origin = 0
 layer_2/z_index = 0
 layer_2/tile_data = PackedInt32Array(196638, 2, 131072, 196637, 2, 131072, 196636, 2, 131072, 327666, 2, 131072, 327667, 2, 131072, 327668, 2, 131072, -65507, 1, 131072)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(35, 52)
-zoom = Vector2(4, 4)
-
-[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
-script = ExtResource("2_qpxtq")
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
