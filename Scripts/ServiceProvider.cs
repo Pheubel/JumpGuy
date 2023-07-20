@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class ServiceProvider : SingletonNode<ServiceProvider>
+public partial class ServiceProvider : Node
 {
 	private System.Collections.Generic.Dictionary<Type, object> _serviceCollection = new();
 

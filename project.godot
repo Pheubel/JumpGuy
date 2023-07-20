@@ -15,6 +15,11 @@ run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+ServiceProvider="*res://Scripts/ServiceProvider.cs"
+SaveSystem="*res://Scripts/Nodes/Systems/SaveSystem.cs"
+
 [dotnet]
 
 project/assembly_name="Jump Guy"

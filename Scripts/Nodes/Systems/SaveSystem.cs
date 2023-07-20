@@ -1,10 +1,11 @@
 ﻿using System;
 using System.IO;
 using Godot;
+using JumpGuy.Utils;
 
 namespace JumpGuy.Scripts.Nodes.Systems
 {
-	public partial class SaveSystem : SingletonNode<SaveSystem>
+	public partial class SaveSystem : Node
 	{
 		private static readonly string saveFilePath = ProjectSettings.GlobalizePath("user://save_data.res");
 
@@ -18,7 +19,7 @@ namespace JumpGuy.Scripts.Nodes.Systems
 
 		public override void _Ready()
 		{
-			ServiceProvider.Instance.AddService(_loadedData);
+			this.GetGlobalNode<ServiceProvider>().AddService(_loadedData);
 		}
 
 		private static T LoadSave<T>() where T : class, new()

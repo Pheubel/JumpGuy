@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using JumpGuy.Utils;
 
 public partial class SceneHost : Node
 {
@@ -10,7 +11,7 @@ public partial class SceneHost : Node
 
 	public override void _Ready()
 	{
-		ServiceProvider.Instance.AddService(this);
+		this.GetGlobalNode<ServiceProvider>().AddService(this);
 
 		_currentScene = _defaultScene.Instantiate();
 		AddChild(_currentScene);
@@ -18,7 +19,7 @@ public partial class SceneHost : Node
 
 	public override void _ExitTree()
 	{
-		ServiceProvider.Instance.TryRemoveService<SceneHost>();
+		this.GetGlobalNode<ServiceProvider>().TryRemoveService<SceneHost>();
 	}
 
 	public void SwapScene(PackedScene newScene)

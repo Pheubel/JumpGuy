@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://be6l88ndqih0w"]
+[gd_scene load_steps=5 format=3 uid="uid://be6l88ndqih0w"]
 
 [ext_resource type="TileSet" uid="uid://do6cg1wgb1s58" path="res://Tiles/level tileset.tres" id="1_ajgcw"]
 [ext_resource type="PackedScene" uid="uid://f504s734vnsh" path="res://SceneObjects/Player.tscn" id="2_mswot"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="3_y45l4"]
+[ext_resource type="PackedScene" uid="uid://b276i0tuwao34" path="res://SceneObjects/Overlays/hud.tscn" id="4_o4e2m"]
 
 [node name="Level 2" type="Node2D"]
 
@@ -41,3 +42,5 @@ inactive_update_mode = 0
 
 [node name="Player" parent="." instance=ExtResource("2_mswot")]
 position = Vector2(-8, -184)
+
+[node name="HUD" parent="." instance=ExtResource("4_o4e2m")]

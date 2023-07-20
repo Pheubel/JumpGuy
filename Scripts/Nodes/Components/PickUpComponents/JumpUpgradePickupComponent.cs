@@ -1,4 +1,5 @@
 using Godot;
+using JumpGuy.Utils;
 using System;
 
 public partial class JumpUpgradePickupComponent : Node, IUpgradePickupComponent<JumpUpgradeFlag>
@@ -8,7 +9,7 @@ public partial class JumpUpgradePickupComponent : Node, IUpgradePickupComponent<
 
 	public void HandlePlayerTouched(CharacterController _)
 	{
-		var data = ServiceProvider.Instance.GetService<PlayerData>();
+		var data = this.GetGlobalNode<ServiceProvider>().GetService<PlayerData>();
 
 		data.CollectedJumpUpgrades |= Upgrade;
 	}

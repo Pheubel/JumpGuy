@@ -1,10 +1,5 @@
-
 using Godot;
-using System.Numerics;
-
-#if !NET8_0_OR_GREATER
-using System.Runtime.Intrinsics.X86;
-#endif
+using JumpGuy.Utils;
 
 public partial class JumpUpgradeComponent : Node
 {
@@ -13,16 +8,21 @@ public partial class JumpUpgradeComponent : Node
 
 	public int RemainingJumpCount { get; private set; }
 
-	private PlayerData _playerData = null!;
-
 	private int _maxAirJumpCount = default;
 
 	public override void _Ready()
 	{
-		_playerData = ServiceProvider.Instance.GetService<PlayerData>();
+		var playerData = this.GetGlobalNode<ServiceProvider>().GetService<PlayerData>();
 
-		_playerData.Changed += UpdateMaxJumpCount;
-		UpdateMaxJumpCount();
+		playerData.OnJumpUpgradeChanged += UpdateMaxJumpCount;
+		UpdateMaxJumpCount(playerData.CollectedJumpUpgrades);
+	}
+
+	public override void _ExitTree()
+	{
+		var playerData = this.GetGlobalNode<ServiceProvider>().GetService<PlayerData>();
+
+		playerData.OnJumpUpgradeChanged -= UpdateMaxJumpCount;
 	}
 
 	public void ResetJumpCount()
@@ -40,13 +40,8 @@ public partial class JumpUpgradeComponent : Node
 		return true;
 	}
 
-	public void UpdateMaxJumpCount()
+	public void UpdateMaxJumpCount(JumpUpgradeFlag activeJumpUpgrades)
 	{
-#if !NET8_0_OR_GREATER
-		if (Popcnt.IsSupported)
-			_maxAirJumpCount = (int)Popcnt.PopCount((uint)_playerData.CollectedJumpUpgrades);
-		else
-#endif
-			_maxAirJumpCount = BitOperations.PopCount((uint)_playerData.CollectedJumpUpgrades);
+		_maxAirJumpCount = BitOps.PopCount((int)activeJumpUpgrades);
 	}
 }

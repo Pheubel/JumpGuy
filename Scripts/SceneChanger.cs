@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using JumpGuy.Utils;
 
 public partial class SceneChanger : Node
 {
@@ -8,7 +9,7 @@ public partial class SceneChanger : Node
 
 	public void SwapScene()
 	{
-		var sceneHost = ServiceProvider.Instance.GetService<SceneHost>();
+		var sceneHost = this.GetGlobalNode<ServiceProvider>().GetService<SceneHost>();
 
 		sceneHost.SwapSceneDeferred(_newScene);
 	}
