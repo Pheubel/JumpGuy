@@ -1,0 +1,66 @@
+[gd_scene load_steps=11 format=3 uid="uid://b06hf7fbg8qqx"]
+
+[ext_resource type="Texture2D" uid="uid://cmflaeami6hs3" path="res://Textures/Knight/KnightWalk1.png" id="1_rr68p"]
+[ext_resource type="Texture2D" uid="uid://6sa12uqiyj27" path="res://Textures/Knight/KnightWalk2.png" id="2_hwory"]
+[ext_resource type="Texture2D" uid="uid://1d6aqedle6c4" path="res://Textures/Knight/KnightWalk3.png" id="3_cvo3t"]
+[ext_resource type="Script" path="res://Scripts/Nodes/Components/HealthComponent.cs" id="4_upb18"]
+[ext_resource type="Script" path="res://Scripts/Nodes/Components/DestroyableComponent.cs" id="5_g17al"]
+[ext_resource type="Script" path="res://Scripts/Nodes/Components/PlayerBulletTargetComponent.cs" id="6_ulw5e"]
+[ext_resource type="Script" path="res://Scripts/Nodes/Components/ReactToPlayerTouchedComponent.cs" id="7_rdab3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fvg6b"]
+size = Vector2(16, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cw4ld"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_rr68p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_hwory")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_cvo3t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m5sv1"]
+size = Vector2(16, 6)
+
+[node name="GenericEnemy" type="RigidBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.455)
+shape = SubResource("RectangleShape2D_fvg6b")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_cw4ld")
+frame_progress = 0.640823
+offset = Vector2(8, 0)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(16, 5.955)
+shape = SubResource("RectangleShape2D_m5sv1")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("4_upb18")
+Health = 1
+
+[node name="DestroyableComponent" type="Node" parent="."]
+script = ExtResource("5_g17al")
+
+[node name="PlayerBulletTargetComponent" type="Node" parent="."]
+script = ExtResource("6_ulw5e")
+
+[node name="ReactToPlayerTouchedComponent" type="Node" parent="."]
+script = ExtResource("7_rdab3")
+
+[connection signal="OnHealthDepleted" from="HealthComponent" to="DestroyableComponent" method="Destroy"]
+[connection signal="OnBulletHit" from="PlayerBulletTargetComponent" to="HealthComponent" method="TakeDamage" binds= [1]]

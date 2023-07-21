@@ -17,8 +17,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-ServiceProvider="*res://Scripts/ServiceProvider.cs"
+ServiceProvider="*res://Scripts/Nodes/Systems/ServiceProvider.cs"
 SaveSystem="*res://Scripts/Nodes/Systems/SaveSystem.cs"
+MessageBroker="*res://Scripts/Nodes/Systems/MessageBroker.cs"
 
 [dotnet]
 

@@ -2,7 +2,7 @@ using System;
 using Godot;
 using JumpGuy.Utils;
 
-public partial class HealthSystem : Node
+public partial class HealthHUD : Node
 {
 	[Export(PropertyHint.Range, "0,1000000,1,hide_slider")]
 	public int HeartWidth { get; private set; }
